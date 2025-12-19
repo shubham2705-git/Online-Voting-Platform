@@ -28,7 +28,7 @@ public class CandidateController {
 	public ResponseEntity<Candidate> addCandidate(@RequestBody @Valid Candidate candidate){
 		Candidate savedCandidate=candidateService.addCandidate(candidate);
 		return new ResponseEntity<Candidate>(savedCandidate,HttpStatus.CREATED);
-	}
+	 }
 	
 	
 	
