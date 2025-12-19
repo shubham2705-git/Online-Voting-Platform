@@ -23,7 +23,7 @@ public class CandidateService {
 		return candidateRepository.save(candidate);
 	}
 	
-	public List<Candidate>getAllcandidates(){
+	public List<Candidate>getAllCandidates(){
 		return candidateRepository.findAll();
 	}
 	
