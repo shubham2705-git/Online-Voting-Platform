@@ -1,4 +1,4 @@
-package in.sr.voteasy.controllers;
+package in.sr.voteasy.services;
 
 import java.util.List;
 
@@ -51,7 +51,7 @@ public class CandidateService {
 		List<Vote>votes=candidate.getVote();
 		for(Vote v:votes) {
 			v.setCandidate(null);
-		}
+		 }
 		candidate.getVote().clear();
 		candidateRepository.delete(candidate);
 	} 
