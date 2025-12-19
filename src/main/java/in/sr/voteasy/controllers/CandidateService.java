@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import in.sr.voteasy.entities.Candidate;
+import in.sr.voteasy.entities.Vote;
 import in.sr.voteasy.exceptions.ResourceNotFoundException;
 import in.sr.voteasy.repositories.CandidateRepository;
 
@@ -46,9 +47,12 @@ public class CandidateService {
 	}
 	
 	public void deleteCandidate(Long id) {
-		
-	}
-	
-	
-
+		Candidate candidate=getCandidateById(id);
+		List<Vote>votes=candidate.getVote();
+		for(Vote v:votes) {
+			v.setCandidate(null);
+		}
+		candidate.getVote().clear();
+		candidateRepository.delete(candidate);
+	} 
 }
