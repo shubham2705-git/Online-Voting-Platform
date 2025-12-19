@@ -9,6 +9,7 @@ import in.sr.voteasy.entities.Candidate;
 import in.sr.voteasy.entities.Vote;
 import in.sr.voteasy.exceptions.ResourceNotFoundException;
 import in.sr.voteasy.repositories.CandidateRepository;
+import jakarta.transaction.Transactional;
 
 @Service
 public class CandidateService {
@@ -46,6 +47,7 @@ public class CandidateService {
 		return candidateRepository.save(candidate);
 	}
 	
+	@Transactional
 	public void deleteCandidate(Long id) {
 		Candidate candidate=getCandidateById(id);
 		List<Vote>votes=candidate.getVote();
