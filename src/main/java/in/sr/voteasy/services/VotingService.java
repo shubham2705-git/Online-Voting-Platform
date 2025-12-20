@@ -1,5 +1,7 @@
 package in.sr.voteasy.services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import in.sr.voteasy.entities.Candidate;
@@ -51,6 +53,12 @@ public class VotingService {
 		
 		return vote;
 	}
+	public List<Vote> getAllVotes(){
+		return voteRepository.findAll();
+	}
+
+
+	
 	
 	
 

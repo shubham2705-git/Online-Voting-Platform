@@ -1,0 +1,36 @@
+package in.sr.voteasy.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import in.sr.voteasy.dto.VoteRequestDTO;
+import in.sr.voteasy.dto.VoteResponseDTO;
+import in.sr.voteasy.entities.Vote;
+import in.sr.voteasy.services.VotingService;
+import jakarta.validation.Valid;
+
+@RestController
+@RequestMapping("/api/votes")
+@CrossOrigin
+public class VotingController {
+	private VotingService votingService;
+	
+	@Autowired
+	public VotingController(VotingService votingService) {
+		this.votingService = votingService;
+	}
+	
+	@PostMapping("/cast")
+	public ResponseEntity<VoteResponseDTO> castVote(@RequestBody @Valid VoteRequestDTO voteRequest){
+		Vote vote=votingService.castVote(voteRequest.getVoterId(), voteRequest.getCandidateId());
+		VoteResponseDTO voteResponse=new VoteResponseDTO("vote casted successfully",true,vote.getVoterId(),vote.getCandidateId());
+		return new ResponseEntity<>(voteResponse,HttpStatus.CREATED);
+	}
+
+}
