@@ -52,5 +52,8 @@ public class ElectionResultService {
 		
 		return electionResultRepository.save(result);
 	}
+	public List<ElectionResult> getAllResults(){
+		return electionResultRepository.findAll();
+	}
 
 }
