@@ -1,9 +1,12 @@
 package in.sr.voteasy.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +34,12 @@ public class VotingController {
 		Vote vote=votingService.castVote(voteRequest.getVoterId(), voteRequest.getCandidateId());
 		VoteResponseDTO voteResponse=new VoteResponseDTO("vote casted successfully",true,vote.getVoterId(),vote.getCandidateId());
 		return new ResponseEntity<>(voteResponse,HttpStatus.CREATED);
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<Vote>> getAllVotes(){
+		List<Vote> voteList = votingService.getAllVotes();
+		return new ResponseEntity<>(voteList,HttpStatus.OK);
 	}
 
 }
